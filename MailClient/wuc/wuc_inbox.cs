@@ -17,16 +17,15 @@ namespace MailClient.wuc
     #region / locals /
     private CImapClient srv = null;
     private List<ImapX.Message> inbox;
+    private LoginCred login = null;
     #endregion
     #region / constructor /
-    public wuc_inbox(CImapClient srv)
+    public wuc_inbox(CImapClient srv, LoginCred login)
     {
       InitializeComponent();
       this.srv = srv;
-      lv_messages.Columns[0].Width = 0;
-      if (srv == null)
-        label1.Text = "null";
-      else label1.Text = "notnull";
+      this.login = login;
+      lv_messages.Columns[1].Width = 0;
       try
       {
         PopulateMailList();
@@ -35,7 +34,7 @@ namespace MailClient.wuc
       { }
     }
     #endregion
-    #region / private /
+    #region / mail specific methods /
     private void PopulateMailList()
     {
       lv_messages.Items.Clear();
@@ -67,8 +66,48 @@ namespace MailClient.wuc
     }
     private void OpenMailForm(object sender, EventArgs e)
     {
-      SendMail mailForm = new SendMail("diskjokeyshaco@gmail.com", "asdqwe123123");
+      SendMail mailForm = new SendMail(login.Username, login.Password);
       mailForm.Show();
+    }
+    private void Refresh(object sender, EventArgs e)
+    {
+      PopulateMailList();
+    }
+    private void SelectAll(object sender, EventArgs e)
+    {
+      foreach (ListViewItem l in lv_messages.Items)
+        l.Checked = true;
+    }
+    private void SelectNone(object sender, EventArgs e)
+    {
+      foreach (ListViewItem l in lv_messages.Items)
+        l.Checked = false;
+    }
+    private void DeleteMessages(object sender, EventArgs e)
+    {
+      if (MessageBox.Show("Are you sure you want to delete these " + lv_messages.CheckedItems.Count + " messages?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+      {
+        List<ImapX.Message> ls = new List<ImapX.Message>();
+        long uid;
+        foreach (ListViewItem item in lv_messages.CheckedItems)
+        {
+          uid = long.Parse(item.SubItems[0].Text);
+          ls.Add((ImapX.Message)inbox.Where(x => (long)x.UId == uid).First());
+        }
+        foreach (ImapX.Message msg in ls)
+          msg.Remove();
+        PopulateMailList();
+      }
+    }
+    #endregion
+    #region / private /
+    private void lv_cancelResize(object sender, ColumnWidthChangingEventArgs e)
+    {
+      if (e.ColumnIndex == 1)
+      {
+        e.Cancel = true;
+        e.NewWidth = 0;
+      }
     }
     #endregion
   }

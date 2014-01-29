@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,14 +18,39 @@ namespace MailClient
   {
     #region / locals /
     private CImapClient srv = null;
+    private LoginCred login = null;
+    private Domains domains = null;
     private wuc.wuc_login loginW = null;
     private wuc.wuc_inbox inboxW = null;
+
+    private readonly string domainPath = "settings\\domains";
     #endregion
     #region / constructor /
     public MainWindow()
     {
       InitializeComponent();
       srv = new CImapClient();
+      login = new LoginCred();
+
+      if (File.Exists(domainPath))
+      {
+        try
+        {
+          this.domains = Common.DeserializeDomains(domainPath);
+        }
+        catch (Exception)
+        {
+          File.Delete(domainPath);
+          domains = new Domains();
+          domains.DomainList.Add("gmail.com");
+        }
+      }
+      else
+      {
+        domains = new Domains();
+        domains.DomainList.Add("gmail.com");
+      }
+
       AddLoginWuc();
     }
     #endregion
@@ -42,7 +68,7 @@ namespace MailClient
     #region / wuc add/remove /
     private void AddLoginWuc()
     {
-      loginW = new wuc.wuc_login(srv);
+      loginW = new wuc.wuc_login(srv, login, domains);
       loginW.loginSuccessful += new Delegates.EhLogin(loginHandler);
       Controls.Add(loginW);
     }
@@ -54,7 +80,7 @@ namespace MailClient
     }
     private void AddInboxWuc()
     {
-      inboxW = new wuc.wuc_inbox(srv);
+      inboxW = new wuc.wuc_inbox(srv, login);
       Controls.Add(inboxW);
     }
     private void RemoveInboxWuc()
@@ -66,19 +92,10 @@ namespace MailClient
     #endregion
     private void cleanUp(object sender, FormClosedEventArgs e)
     {
-      try
-      {
-        srv.Disconnect();
-      }
-      catch (Exception ex) { }
-    }
-    private void lv_cancelResize(object sender, ColumnWidthChangingEventArgs e)
-    {
-      if (e.ColumnIndex == 0)
-      {
-        e.Cancel = true;
-        e.NewWidth = 0;
-      }
+      srv.Disconnect();
+      if (!Directory.Exists("settings"))
+        Directory.CreateDirectory("settings");
+      Common.SerializeDomains (domains, domainPath);
     }
     #endregion
   }

@@ -49,6 +49,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Delegates.cs" />
+    <Compile Include="EmptyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EmptyForm.Designer.cs">
+      <DependentUpon>EmptyForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,6 +75,12 @@
     <Compile Include="ViewMail.Designer.cs">
       <DependentUpon>ViewMail.cs</DependentUpon>
     </Compile>
+    <Compile Include="wuc\wuc_addDomain.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="wuc\wuc_addDomain.Designer.cs">
+      <DependentUpon>wuc_addDomain.cs</DependentUpon>
+    </Compile>
     <Compile Include="wuc\wuc_inbox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -81,6 +93,9 @@
     <Compile Include="wuc\wuc_login.Designer.cs">
       <DependentUpon>wuc_login.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="EmptyForm.resx">
+      <DependentUpon>EmptyForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
@@ -98,6 +113,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ViewMail.resx">
       <DependentUpon>ViewMail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="wuc\wuc_addDomain.resx">
+      <DependentUpon>wuc_addDomain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="wuc\wuc_inbox.resx">
       <DependentUpon>wuc_inbox.cs</DependentUpon>

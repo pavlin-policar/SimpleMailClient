@@ -17,7 +17,6 @@ namespace MailClientLib
     protected bool blnConnected = false;
     #endregion
     #region / properties /
-    public string Path { get; set; }
     public bool Connected { get { return blnConnected;} }
     public LoginCred Credidentials { set { login = value; } }
     #endregion
@@ -34,7 +33,7 @@ namespace MailClientLib
     {
       imapc = new ImapClient(server, true);
       if (imapc.Connect())
-        if (imapc.Login(login.username, login.password))
+        if (imapc.Login(login.Username, login.Password))
         {
           blnConnected = true;
           imapc.Behavior.AutoPopulateFolderMessages = true;
@@ -42,7 +41,8 @@ namespace MailClientLib
     }
     public void Disconnect ()
     {
-      imapc.Disconnect();
+      if (imapc != null)
+        imapc.Disconnect();
       blnConnected = false;
     }
     public List<Folder> GetFolders()
@@ -51,6 +51,10 @@ namespace MailClientLib
       foreach (Folder folder in imapc.Folders)
         ls.Add(folder);
       return ls;
+    }
+    public void DeleteMail(Message msg)
+    {
+      msg.Remove();
     }
     public List<Message> GetInbox ()
     {
