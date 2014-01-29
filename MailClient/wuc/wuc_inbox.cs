@@ -24,6 +24,9 @@ namespace MailClient.wuc
       InitializeComponent();
       this.srv = srv;
       lv_messages.Columns[0].Width = 0;
+      if (srv == null)
+        label1.Text = "null";
+      else label1.Text = "notnull";
       try
       {
         PopulateMailList();

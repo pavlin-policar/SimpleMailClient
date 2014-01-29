@@ -19,8 +19,11 @@ namespace MailClientLib
     #region / properties /
     public string Path { get; set; }
     public bool Connected { get { return blnConnected;} }
+    public LoginCred Credidentials { set { login = value; } }
     #endregion
     #region / constructor /
+    public CImapClient()
+    { }
     public CImapClient(LoginCred login)
     {
       this.login = login;

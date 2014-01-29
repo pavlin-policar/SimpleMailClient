@@ -24,6 +24,7 @@ namespace MailClient
     public MainWindow()
     {
       InitializeComponent();
+      srv = new CImapClient();
       AddLoginWuc();
     }
     #endregion
@@ -38,6 +39,7 @@ namespace MailClient
     }
     #endregion
     #region / private /
+    #region / wuc add/remove /
     private void AddLoginWuc()
     {
       loginW = new wuc.wuc_login(srv);
@@ -61,6 +63,7 @@ namespace MailClient
       inboxW.Dispose();
       inboxW = null;
     }
+    #endregion
     private void cleanUp(object sender, FormClosedEventArgs e)
     {
       try

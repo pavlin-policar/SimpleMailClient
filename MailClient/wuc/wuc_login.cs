@@ -35,7 +35,7 @@ namespace MailClient.wuc
       LoginCred login = new LoginCred("diskjokeyshaco@gmail.com", "asdqwe123123");
       try
       {
-        srv = new CImapClient(login);
+        srv.Credidentials = login;
         srv.Connect(login, "imap.gmail.com");
         if (srv.Connected)
           loginSuccessful(true);

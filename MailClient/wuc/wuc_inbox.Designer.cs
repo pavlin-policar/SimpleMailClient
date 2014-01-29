@@ -34,6 +34,7 @@
       this.subject_col = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.from_col = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.date_col = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+      this.label1 = new System.Windows.Forms.Label();
       this.SuspendLayout();
       // 
       // b_sendMail
@@ -87,15 +88,26 @@
       this.date_col.Text = "Date recieved";
       this.date_col.Width = 110;
       // 
+      // label1
+      // 
+      this.label1.AutoSize = true;
+      this.label1.Location = new System.Drawing.Point(47, 97);
+      this.label1.Name = "label1";
+      this.label1.Size = new System.Drawing.Size(35, 13);
+      this.label1.TabIndex = 5;
+      this.label1.Text = "label1";
+      // 
       // wuc_inbox
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      this.Controls.Add(this.label1);
       this.Controls.Add(this.lv_messages);
       this.Controls.Add(this.b_sendMail);
       this.Name = "wuc_inbox";
       this.Size = new System.Drawing.Size(800, 467);
       this.ResumeLayout(false);
+      this.PerformLayout();
 
     }
 
@@ -107,6 +119,7 @@
     private System.Windows.Forms.ColumnHeader subject_col;
     private System.Windows.Forms.ColumnHeader from_col;
     private System.Windows.Forms.ColumnHeader date_col;
+    private System.Windows.Forms.Label label1;
 
   }
 }
