@@ -26,11 +26,11 @@ namespace MailClientLib
     {
       if (serializableObject == null)
         return;
-
       XmlSerializer xmls = new XmlSerializer(typeof(Domains));
       Stream stream = File.Open(fileName, FileMode.Create);
       xmls.Serialize(stream, serializableObject);
       stream.Close();
+      stream.Dispose();
     }
     public static Domains DeserializeDomains(string fileName)
     {
@@ -39,6 +39,7 @@ namespace MailClientLib
       Stream stream = File.Open(fileName, FileMode.Open);
       dm = (Domains)xmls.Deserialize(stream);
       stream.Close();
+      stream.Dispose();
       return dm;
     }
   }

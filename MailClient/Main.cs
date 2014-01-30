@@ -69,7 +69,7 @@ namespace MailClient
     private void AddLoginWuc()
     {
       loginW = new wuc.wuc_login(srv, login, domains);
-      loginW.loginSuccessful += new Delegates.EhLogin(loginHandler);
+      loginW.loginSuccessful += new Delegates.EhBool(loginHandler);
       Controls.Add(loginW);
     }
     private void RemoveLoginWuc()

@@ -27,7 +27,8 @@ namespace MailClient.wuc
     #region / private form event /
     private void b_AddDomainToList_Click(object sender, EventArgs e)
     {
-      if (MessageBox.Show("Are you sure you wish to add the domain: " + tb_domain.Text + "?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+      if (MessageBox.Show("Are you sure you wish to add the domain: " + tb_domain.Text + "?",
+        "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
       {
         domains.DomainList.Add(tb_domain.Text);
         EmptyForm parent = (EmptyForm)this.Parent;

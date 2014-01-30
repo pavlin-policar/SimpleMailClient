@@ -16,7 +16,7 @@ namespace MailClient.wuc
   public partial class wuc_login : UserControl
   {
     #region / events /
-    public event Delegates.EhLogin loginSuccessful;
+    public event Delegates.EhBool loginSuccessful;
     #endregion
     #region / locals /
     private CImapClient srv;
@@ -37,8 +37,8 @@ namespace MailClient.wuc
     #region / private /
     private void Login(object sender, EventArgs e)
     {
-      //login = new LoginCred(tb_username.Text + "@" + cb_domains.SelectedText, tb_password.Text);
-      //login = new LoginCred("diskjokeyshaco@gmail.com", "asdqwe123123");
+      //login.Username = String.Format("{0}@{1}", tb_username.Text, cb_domains.Text);
+      //login.Password = tb_password.Text;
       login.Username = "diskjokeyshaco@gmail.com";
       login.Password = "asdqwe123123";
       try

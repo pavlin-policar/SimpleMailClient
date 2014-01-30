@@ -81,6 +81,12 @@
     <Compile Include="wuc\wuc_addDomain.Designer.cs">
       <DependentUpon>wuc_addDomain.cs</DependentUpon>
     </Compile>
+    <Compile Include="wuc\wuc_attachment.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="wuc\wuc_attachment.Designer.cs">
+      <DependentUpon>wuc_attachment.cs</DependentUpon>
+    </Compile>
     <Compile Include="wuc\wuc_inbox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -116,6 +122,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="wuc\wuc_addDomain.resx">
       <DependentUpon>wuc_addDomain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="wuc\wuc_attachment.resx">
+      <DependentUpon>wuc_attachment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="wuc\wuc_inbox.resx">
       <DependentUpon>wuc_inbox.cs</DependentUpon>

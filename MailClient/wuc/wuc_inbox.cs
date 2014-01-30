@@ -43,19 +43,20 @@ namespace MailClient.wuc
 
       foreach (ImapX.Message msg in inbox)
       {
-        ListViewItem message = new ListViewItem(msg.UId.ToString());
+        ListViewItem message = new ListViewItem("");
         if (msg.Seen == false)
           message.Font = new Font(lv_messages.Font, FontStyle.Bold);
+        message.SubItems.Add(msg.UId.ToString());
         message.SubItems.Add(msg.Subject.ToString());
         message.SubItems.Add(msg.From.ToString());
-        message.SubItems.Add(msg.Date.ToString());
+        message.SubItems.Add(DateTime.Parse(msg.Date.ToString()).ToString("dd.MM.yyyy HH:mm"));
         lv_messages.Items.Add(message);
       }
     }
     private void ShowEmailMessage(object sender, EventArgs e)
     {
       long index = long.Parse(lv_messages.SelectedIndices[0].ToString());
-      int uid = int.Parse(lv_messages.SelectedItems[0].SubItems[0].Text);
+      int uid = int.Parse(lv_messages.SelectedItems[0].SubItems[1].Text);
       ImapX.Message dmsg = (ImapX.Message)inbox.Where(x => (long)x.UId == uid).First();
 
       dmsg.Seen = true;
@@ -85,13 +86,14 @@ namespace MailClient.wuc
     }
     private void DeleteMessages(object sender, EventArgs e)
     {
-      if (MessageBox.Show("Are you sure you want to delete these " + lv_messages.CheckedItems.Count + " messages?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+      if (MessageBox.Show("Are you sure you want to delete these " + lv_messages.CheckedItems.Count + " messages?",
+        "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
       {
         List<ImapX.Message> ls = new List<ImapX.Message>();
         long uid;
         foreach (ListViewItem item in lv_messages.CheckedItems)
         {
-          uid = long.Parse(item.SubItems[0].Text);
+          uid = long.Parse(item.SubItems[1].Text);
           ls.Add((ImapX.Message)inbox.Where(x => (long)x.UId == uid).First());
         }
         foreach (ImapX.Message msg in ls)

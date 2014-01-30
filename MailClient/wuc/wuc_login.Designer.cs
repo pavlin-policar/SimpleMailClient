@@ -76,7 +76,7 @@
       this.cb_domains.Location = new System.Drawing.Point(210, 16);
       this.cb_domains.Name = "cb_domains";
       this.cb_domains.Size = new System.Drawing.Size(126, 21);
-      this.cb_domains.TabIndex = 1;
+      this.cb_domains.TabIndex = 5;
       // 
       // label2
       // 
