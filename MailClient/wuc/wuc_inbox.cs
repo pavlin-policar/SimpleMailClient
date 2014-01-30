@@ -16,15 +16,17 @@ namespace MailClient.wuc
   {
     #region / locals /
     private CImapClient srv = null;
-    private List<ImapX.Message> inbox;
+    private List<ImapX.Message> inbox = null;
     private LoginCred login = null;
+    private List<Contact> contacts = null;
     #endregion
     #region / constructor /
-    public wuc_inbox(CImapClient srv, LoginCred login)
+    public wuc_inbox(CImapClient srv, LoginCred login, List<Contact> contacts)
     {
       InitializeComponent();
       this.srv = srv;
       this.login = login;
+      this.contacts = contacts;
       lv_messages.Columns[1].Width = 0;
       try
       {
@@ -112,6 +114,13 @@ namespace MailClient.wuc
       foreach (ListViewItem item in lv_messages.CheckedItems)
         ((ImapX.Message)inbox.Where(x => (long)x.UId == (long.Parse(item.SubItems[1].Text))).First()).Seen = false;
       PopulateMailList();
+    }
+    private void b_contacts_Click(object sender, EventArgs e)
+    {
+      EmptyForm ef = new EmptyForm();
+      wuc.wuc_contactList clW = new wuc.wuc_contactList(contacts, login);
+      ef.Controls.Add(clW);
+      ef.Show();
     }
     #endregion
     #region / private /

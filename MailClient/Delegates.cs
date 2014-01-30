@@ -9,6 +9,7 @@ namespace MailClient
 {
   public class Delegates
   {
+    public delegate void EhVoid();
     public delegate void EhBool(bool blnLogin);
     public delegate void EhAttachment(Attachment attachment);
   }

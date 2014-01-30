@@ -23,7 +23,10 @@ namespace MailClient
     private wuc.wuc_login loginW = null;
     private wuc.wuc_inbox inboxW = null;
 
-    private readonly string domainPath = "settings\\domains";
+    private List<Contact> contacts = null;
+
+    public static readonly string contactPath = "contacts";
+    public static string domainPath = "settings\\domains";
     #endregion
     #region / constructor /
     public MainWindow()
@@ -32,6 +35,7 @@ namespace MailClient
       srv = new CImapClient();
       login = new LoginCred();
 
+      // get domains
       if (File.Exists(domainPath))
       {
         try
@@ -49,6 +53,17 @@ namespace MailClient
       {
         domains = new Domains();
         domains.DomainList.Add("gmail.com");
+      }
+      // get contacts
+      contacts = new List<Contact>();
+      if (Directory.Exists(contactPath))
+      {
+        Contact ct = null;
+        foreach (string f in Directory.GetFiles(contactPath, "*.contact"))
+        {
+          ct = Common.DeserializeContact(f);
+          contacts.Add(ct);
+        }
       }
 
       AddLoginWuc();
@@ -80,7 +95,7 @@ namespace MailClient
     }
     private void AddInboxWuc()
     {
-      inboxW = new wuc.wuc_inbox(srv, login);
+      inboxW = new wuc.wuc_inbox(srv, login, contacts);
       Controls.Add(inboxW);
     }
     private void RemoveInboxWuc()
@@ -93,9 +108,23 @@ namespace MailClient
     private void cleanUp(object sender, FormClosedEventArgs e)
     {
       srv.Disconnect();
+      // domains
       if (!Directory.Exists("settings"))
         Directory.CreateDirectory("settings");
       Common.SerializeDomains (domains, domainPath);
+      // contacts
+      if (contacts.Count > 0)
+      {
+        string fileName = string.Empty;
+        if (!Directory.Exists(contactPath))
+          Directory.CreateDirectory(contactPath);
+        foreach (Contact ct in contacts)
+        {
+          fileName = string.Format("{0}.contact", ct.Name);
+          if (!File.Exists(string.Format("{0}\\{1}", contactPath, fileName)))
+            Common.SerializeContact(ct, fileName);
+        }
+      }
     }
     #endregion
   }

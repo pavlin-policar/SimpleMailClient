@@ -75,6 +75,18 @@
     <Compile Include="ViewMail.Designer.cs">
       <DependentUpon>ViewMail.cs</DependentUpon>
     </Compile>
+    <Compile Include="wuc\wuc_addContact.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="wuc\wuc_addContact.Designer.cs">
+      <DependentUpon>wuc_addContact.cs</DependentUpon>
+    </Compile>
+    <Compile Include="wuc\wuc_contactList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="wuc\wuc_contactList.Designer.cs">
+      <DependentUpon>wuc_contactList.cs</DependentUpon>
+    </Compile>
     <Compile Include="wuc\wuc_dlAttachment.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -125,6 +137,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ViewMail.resx">
       <DependentUpon>ViewMail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="wuc\wuc_addContact.resx">
+      <DependentUpon>wuc_addContact.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="wuc\wuc_contactList.resx">
+      <DependentUpon>wuc_contactList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="wuc\wuc_dlAttachment.resx">
       <DependentUpon>wuc_dlAttachment.cs</DependentUpon>

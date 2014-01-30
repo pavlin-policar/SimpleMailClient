@@ -62,12 +62,13 @@ namespace MailClient.wuc
       parentForm.Text = "Domain Manager";
 
       wuc.wuc_addDomain domainW = new wuc_addDomain(domains);
+      domainW.domainAdded += new Delegates.EhVoid(FillDomains);
       parentForm.Controls.Add(domainW);
-      // still have to refresh combobox on close
       parentForm.Show();
     }
     public void FillDomains()
     {
+      cb_domains.Items.Clear();
       if (domains.DomainList.Count > 0)
       {
         foreach (string d in domains.DomainList)

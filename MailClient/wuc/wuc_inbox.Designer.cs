@@ -41,11 +41,12 @@
       this.b_deleteMessages = new System.Windows.Forms.Button();
       this.b_MarkAsRead = new System.Windows.Forms.Button();
       this.b_MarkUnread = new System.Windows.Forms.Button();
+      this.b_contacts = new System.Windows.Forms.Button();
       this.SuspendLayout();
       // 
       // b_sendMail
       // 
-      this.b_sendMail.Location = new System.Drawing.Point(3, 439);
+      this.b_sendMail.Location = new System.Drawing.Point(0, 62);
       this.b_sendMail.Name = "b_sendMail";
       this.b_sendMail.Size = new System.Drawing.Size(205, 23);
       this.b_sendMail.TabIndex = 3;
@@ -162,10 +163,21 @@
       this.b_MarkUnread.UseVisualStyleBackColor = true;
       this.b_MarkUnread.Click += new System.EventHandler(this.MarkAsUnread);
       // 
+      // b_contacts
+      // 
+      this.b_contacts.Location = new System.Drawing.Point(0, 33);
+      this.b_contacts.Name = "b_contacts";
+      this.b_contacts.Size = new System.Drawing.Size(205, 23);
+      this.b_contacts.TabIndex = 11;
+      this.b_contacts.Text = "Contacts";
+      this.b_contacts.UseVisualStyleBackColor = true;
+      this.b_contacts.Click += new System.EventHandler(this.b_contacts_Click);
+      // 
       // wuc_inbox
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      this.Controls.Add(this.b_contacts);
       this.Controls.Add(this.b_MarkUnread);
       this.Controls.Add(this.b_MarkAsRead);
       this.Controls.Add(this.b_deleteMessages);
@@ -195,6 +207,7 @@
     private System.Windows.Forms.Button b_deleteMessages;
     private System.Windows.Forms.Button b_MarkAsRead;
     private System.Windows.Forms.Button b_MarkUnread;
+    private System.Windows.Forms.Button b_contacts;
 
   }
 }

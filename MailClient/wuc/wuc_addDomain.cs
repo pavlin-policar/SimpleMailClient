@@ -14,6 +14,9 @@ namespace MailClient.wuc
 {
   public partial class wuc_addDomain : UserControl
   {
+    #region / events /
+    public event Delegates.EhVoid domainAdded;
+    #endregion
     #region / locals /
     private Domains domains;
     #endregion
@@ -31,6 +34,7 @@ namespace MailClient.wuc
         "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
       {
         domains.DomainList.Add(tb_domain.Text);
+        domainAdded();
         EmptyForm parent = (EmptyForm)this.Parent;
         parent.Close();
       }
