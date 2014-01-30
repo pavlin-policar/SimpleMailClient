@@ -39,6 +39,8 @@
       this.b_selectAll = new System.Windows.Forms.Button();
       this.b_selectNone = new System.Windows.Forms.Button();
       this.b_deleteMessages = new System.Windows.Forms.Button();
+      this.b_MarkAsRead = new System.Windows.Forms.Button();
+      this.b_MarkUnread = new System.Windows.Forms.Button();
       this.SuspendLayout();
       // 
       // b_sendMail
@@ -140,10 +142,32 @@
       this.b_deleteMessages.UseVisualStyleBackColor = true;
       this.b_deleteMessages.Click += new System.EventHandler(this.DeleteMessages);
       // 
+      // b_MarkAsRead
+      // 
+      this.b_MarkAsRead.Location = new System.Drawing.Point(481, 4);
+      this.b_MarkAsRead.Name = "b_MarkAsRead";
+      this.b_MarkAsRead.Size = new System.Drawing.Size(92, 23);
+      this.b_MarkAsRead.TabIndex = 9;
+      this.b_MarkAsRead.Text = "Mark as read";
+      this.b_MarkAsRead.UseVisualStyleBackColor = true;
+      this.b_MarkAsRead.Click += new System.EventHandler(this.MarkAsRead);
+      // 
+      // b_MarkUnread
+      // 
+      this.b_MarkUnread.Location = new System.Drawing.Point(579, 4);
+      this.b_MarkUnread.Name = "b_MarkUnread";
+      this.b_MarkUnread.Size = new System.Drawing.Size(94, 23);
+      this.b_MarkUnread.TabIndex = 10;
+      this.b_MarkUnread.Text = "Mark as unread";
+      this.b_MarkUnread.UseVisualStyleBackColor = true;
+      this.b_MarkUnread.Click += new System.EventHandler(this.MarkAsUnread);
+      // 
       // wuc_inbox
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      this.Controls.Add(this.b_MarkUnread);
+      this.Controls.Add(this.b_MarkAsRead);
       this.Controls.Add(this.b_deleteMessages);
       this.Controls.Add(this.b_selectNone);
       this.Controls.Add(this.b_selectAll);
@@ -169,6 +193,8 @@
     private System.Windows.Forms.ColumnHeader checkbox_col;
     private System.Windows.Forms.Button b_selectNone;
     private System.Windows.Forms.Button b_deleteMessages;
+    private System.Windows.Forms.Button b_MarkAsRead;
+    private System.Windows.Forms.Button b_MarkUnread;
 
   }
 }

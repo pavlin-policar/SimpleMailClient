@@ -62,7 +62,7 @@ namespace MailClient.wuc
       dmsg.Seen = true;
       PopulateMailList();
 
-      ViewMail viewForm = new ViewMail(dmsg);
+      ViewMail viewForm = new ViewMail(login, dmsg);
       viewForm.Show();
     }
     private void OpenMailForm(object sender, EventArgs e)
@@ -100,6 +100,18 @@ namespace MailClient.wuc
           msg.Remove();
         PopulateMailList();
       }
+    }
+    private void MarkAsRead(object sender, EventArgs e)
+    {
+      foreach (ListViewItem item in lv_messages.CheckedItems)
+        ((ImapX.Message)inbox.Where(x => (long)x.UId == (long.Parse(item.SubItems[1].Text))).First()).Seen = true;
+      PopulateMailList();
+    }
+    private void MarkAsUnread(object sender, EventArgs e)
+    {
+      foreach (ListViewItem item in lv_messages.CheckedItems)
+        ((ImapX.Message)inbox.Where(x => (long)x.UId == (long.Parse(item.SubItems[1].Text))).First()).Seen = false;
+      PopulateMailList();
     }
     #endregion
     #region / private /

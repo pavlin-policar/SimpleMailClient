@@ -75,6 +75,12 @@
     <Compile Include="ViewMail.Designer.cs">
       <DependentUpon>ViewMail.cs</DependentUpon>
     </Compile>
+    <Compile Include="wuc\wuc_dlAttachment.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="wuc\wuc_dlAttachment.Designer.cs">
+      <DependentUpon>wuc_dlAttachment.cs</DependentUpon>
+    </Compile>
     <Compile Include="wuc\wuc_addDomain.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -119,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ViewMail.resx">
       <DependentUpon>ViewMail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="wuc\wuc_dlAttachment.resx">
+      <DependentUpon>wuc_dlAttachment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="wuc\wuc_addDomain.resx">
       <DependentUpon>wuc_addDomain.cs</DependentUpon>

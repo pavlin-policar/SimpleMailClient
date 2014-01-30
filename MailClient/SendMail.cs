@@ -18,7 +18,7 @@ namespace MailClient
     #region / locals /
     private string usr, pass;
     private bool blnAttachment = false;
-    private List<Attachment> attachments;
+    private List<System.Net.Mail.Attachment> attachments;
     #endregion
     #region / constructor /
     public SendMail(string usr, string pass)
@@ -26,12 +26,33 @@ namespace MailClient
       InitializeComponent();
       this.usr = usr;
       this.pass = pass;
-      attachments = new List<Attachment>();
+      if (attachments == null)
+        attachments = new List<System.Net.Mail.Attachment>();
     }
 
-    public SendMail(string usr, string pass, string to) : this(usr, pass)
+    public SendMail(string usr, string pass, string to)
+      : this(usr, pass)
     {
       tb_to.Text = to;
+    }
+
+    public SendMail(string usr, string pass, string to, string subject)
+      : this(usr, pass, to)
+    {
+      if (tb_subject.Text == "")
+        tb_subject.Text = "Re: " + subject;
+    }
+    public SendMail(string usr, string pass, string to, string subject, string body, string origSender)
+      : this(usr, pass, "", subject)
+    {
+      if (tb_subject.Text == "")
+        tb_subject.Text = "Forward: " + subject;
+      StringBuilder sb = new StringBuilder();
+      sb.Append(Environment.NewLine + Environment.NewLine);
+      sb.Append("/--------------- Forwarded by: " + usr + ", Original sender: " + origSender + " --------------/" + Environment.NewLine);
+      sb.Append(Environment.NewLine);
+      sb.Append(body);
+      rtb_message.Text = sb.ToString();
     }
     #endregion
     #region / private /
