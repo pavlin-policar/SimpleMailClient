@@ -64,12 +64,12 @@ namespace MailClient.wuc
       dmsg.Seen = true;
       PopulateMailList();
 
-      ViewMail viewForm = new ViewMail(login, dmsg);
+      ViewMail viewForm = new ViewMail(contacts, login, dmsg);
       viewForm.Show();
     }
     private void OpenMailForm(object sender, EventArgs e)
     {
-      SendMail mailForm = new SendMail(login.Username, login.Password);
+      SendMail mailForm = new SendMail(contacts, login.Username, login.Password);
       mailForm.Show();
     }
     private void Refresh(object sender, EventArgs e)

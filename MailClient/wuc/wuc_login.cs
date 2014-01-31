@@ -37,10 +37,8 @@ namespace MailClient.wuc
     #region / private /
     private void Login(object sender, EventArgs e)
     {
-      //login.Username = String.Format("{0}@{1}", tb_username.Text, cb_domains.Text);
-      //login.Password = tb_password.Text;
-      login.Username = "diskjokeyshaco@gmail.com";
-      login.Password = "asdqwe123123";
+      login.Username = String.Format("{0}@{1}", tb_username.Text, cb_domains.Text);
+      login.Password = tb_password.Text;
       try
       {
         srv.Credidentials = login;

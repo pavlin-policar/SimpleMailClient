@@ -28,6 +28,9 @@ namespace MailClient.wuc
     }
     #endregion
     #region / private form event /
+    /// <summary>
+    /// Adds domain to domain list<>
+    /// </summary>
     private void b_AddDomainToList_Click(object sender, EventArgs e)
     {
       if (MessageBox.Show("Are you sure you wish to add the domain: " + tb_domain.Text + "?",
@@ -39,12 +42,11 @@ namespace MailClient.wuc
         parent.Close();
       }
     }
-    #endregion
-
     private void b_Cancel_Click(object sender, EventArgs e)
     {
       EmptyForm parent = (EmptyForm)this.Parent;
       parent.Close();
     }
+    #endregion
   }
 }

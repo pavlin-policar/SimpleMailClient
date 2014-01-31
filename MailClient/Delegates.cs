@@ -11,6 +11,8 @@ namespace MailClient
   {
     public delegate void EhVoid();
     public delegate void EhBool(bool blnLogin);
+    public delegate void EhInt(int n);
+    public delegate void EhString(string s);
     public delegate void EhAttachment(Attachment attachment);
   }
 }

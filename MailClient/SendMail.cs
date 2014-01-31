@@ -18,32 +18,34 @@ namespace MailClient
     #region / locals /
     private string usr, pass;
     private bool blnAttachment = false;
-    private List<System.Net.Mail.Attachment> attachments;
+    private List<System.Net.Mail.Attachment> attachments = null;
+    private List<Contact> contacts = null;
     #endregion
     #region / constructor /
-    public SendMail(string usr, string pass)
+    public SendMail(List<Contact> contacts, string usr, string pass)
     {
       InitializeComponent();
       this.usr = usr;
       this.pass = pass;
+      this.contacts = contacts;
       if (attachments == null)
         attachments = new List<System.Net.Mail.Attachment>();
     }
 
-    public SendMail(string usr, string pass, string to)
-      : this(usr, pass)
+    public SendMail(List<Contact> contacts, string usr, string pass, string to)
+      : this(contacts, usr, pass)
     {
       tb_to.Text = to;
     }
 
-    public SendMail(string usr, string pass, string to, string subject)
-      : this(usr, pass, to)
+    public SendMail(List<Contact> contacts, string usr, string pass, string to, string subject)
+      : this(contacts, usr, pass, to)
     {
       if (tb_subject.Text == "")
         tb_subject.Text = "Re: " + subject;
     }
-    public SendMail(string usr, string pass, string to, string subject, string body, string origSender)
-      : this(usr, pass, "", subject)
+    public SendMail(List<Contact> contacts, string usr, string pass, string to, string subject, string body, string origSender)
+      : this(contacts, usr, pass, "", subject)
     {
       if (tb_subject.Text == "")
         tb_subject.Text = "Forward: " + subject;
@@ -60,20 +62,30 @@ namespace MailClient
     {
       if (tb_to.Text == "")
         MessageBox.Show("You must enter a recipient.");
-      if (rtb_message.Text == "")
-        if (MessageBox.Show("Are you sure you would like to send a message with no body?",
-          "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
-          return;
-      CSmtpClient smtp;
-      if (!blnAttachment)
-        smtp = new CSmtpClient(usr, pass, tb_to.Text, usr, tb_subject.Text, rtb_message.Text);
       else
-        smtp = new CSmtpClient(usr, pass, tb_to.Text, usr, tb_subject.Text, rtb_message.Text, attachments.ToArray());
-      smtp.sendMessage();
-      MessageBox.Show("Your message was sent successfully!");
-      this.Close();
+      {
+        if (rtb_message.Text == "")
+          if (MessageBox.Show("Are you sure you would like to send a message with no body?",
+            "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+            return;
+        string[] recipients = tb_to.Text.Split(new char[] {';',' '}, StringSplitOptions.RemoveEmptyEntries);
+        CSmtpClient smtp;
+        if (!blnAttachment)
+          foreach (string rcpt in recipients)
+          {
+            smtp = new CSmtpClient(usr, pass, rcpt, usr, tb_subject.Text, rtb_message.Text);
+            smtp.sendMessage();
+          }
+        else
+          foreach (string rcpt in recipients)
+          {
+            smtp = new CSmtpClient(usr, pass, tb_to.Text, usr, tb_subject.Text, rtb_message.Text, attachments.ToArray());
+            smtp.sendMessage();
+          }
+        MessageBox.Show("Your message was sent successfully!");
+        this.Close();
+      }
     }
-
     private void AddAttachment(object sender, EventArgs e)
     {
       DialogResult res = openFileDialog.ShowDialog();
@@ -111,13 +123,33 @@ namespace MailClient
       else
         MessageBox.Show("No attachments have been added.");
     }
+    private void b_Contacts_Click(object sender, EventArgs e)
+    {
+      EmptyForm ef = new EmptyForm();
+      wuc.wuc_contactList clW = new wuc.wuc_contactList(contacts, new LoginCred(usr, pass), true);
+      clW.ContactAddedToRecipientList += new Delegates.EhString(ContactAddedToRecipientList);
+      ef.Controls.Add(clW);
+      ef.Show();
+    }
     #endregion
     #region / event handler /
+    /// <summary>
+    /// Remove attachment from Message attachments.
+    /// </summary>
+    /// <param name="attachment">Attachment object to remove</param>
     private void AttachmentRemovedHandler(Attachment attachment)
     {
       if (attachments.Count < 1)
         blnAttachment = false;
       attachments.Remove(attachment);
+    }
+    /// <summary>
+    /// Add email to recipient list
+    /// </summary>
+    /// <param name="email">Email string</param>
+    private void ContactAddedToRecipientList(string email)
+    {
+      tb_to.Text += email + "; ";
     }
     #endregion
   }

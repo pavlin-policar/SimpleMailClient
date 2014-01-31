@@ -37,6 +37,7 @@
       this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
       this.b_AddAttachment = new System.Windows.Forms.Button();
       this.l_attachments = new System.Windows.Forms.Button();
+      this.b_Contacts = new System.Windows.Forms.Button();
       this.SuspendLayout();
       // 
       // label1
@@ -68,7 +69,7 @@
       // 
       this.tb_to.Location = new System.Drawing.Point(62, 6);
       this.tb_to.Name = "tb_to";
-      this.tb_to.Size = new System.Drawing.Size(811, 20);
+      this.tb_to.Size = new System.Drawing.Size(711, 20);
       this.tb_to.TabIndex = 1;
       // 
       // rtb_message
@@ -109,11 +110,22 @@
       this.l_attachments.UseVisualStyleBackColor = true;
       this.l_attachments.Click += new System.EventHandler(this.HandleAttachments);
       // 
+      // b_Contacts
+      // 
+      this.b_Contacts.Location = new System.Drawing.Point(779, 4);
+      this.b_Contacts.Name = "b_Contacts";
+      this.b_Contacts.Size = new System.Drawing.Size(94, 23);
+      this.b_Contacts.TabIndex = 8;
+      this.b_Contacts.Text = "Contacts";
+      this.b_Contacts.UseVisualStyleBackColor = true;
+      this.b_Contacts.Click += new System.EventHandler(this.b_Contacts_Click);
+      // 
       // SendMail
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(885, 530);
+      this.Controls.Add(this.b_Contacts);
       this.Controls.Add(this.l_attachments);
       this.Controls.Add(this.b_AddAttachment);
       this.Controls.Add(this.b_send);
@@ -140,5 +152,6 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.Button b_AddAttachment;
         private System.Windows.Forms.Button l_attachments;
+        private System.Windows.Forms.Button b_Contacts;
     }
 }

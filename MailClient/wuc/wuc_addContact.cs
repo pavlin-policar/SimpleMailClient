@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -29,10 +30,15 @@ namespace MailClient.wuc
     }
     #endregion
     #region / private form methods /
+    /// <summary>
+    /// Adds contact and writes to file and closes parent form.
+    /// </summary>
     private void b_AddContact_Click(object sender, EventArgs e)
     {
-      if (tb_fname.Text == "" || tb_lname.Text == "" || tb_email.Text == "")
-        MessageBox.Show("You must enter a first and last name, and email to add a contact.");
+      if (tb_fname.Text == "" || tb_email.Text == "")
+        MessageBox.Show("You must enter a name and email to add a contact.");
+      else if (!Regex.Match(tb_email.Text, @"\w+([\.-_]?\w+)*@\w+([\.-]?\w+)*", RegexOptions.IgnoreCase).Success)
+        MessageBox.Show("Please enter a valid email.");
       else
       {
         Contact ct = new Contact(tb_fname.Text, tb_lname.Text, tb_email.Text);

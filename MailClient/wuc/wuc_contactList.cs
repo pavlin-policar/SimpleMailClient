@@ -15,15 +15,20 @@ namespace MailClient.wuc
 {
   public partial class wuc_contactList : UserControl
   {
+    #region / events /
+    public event Delegates.EhString ContactAddedToRecipientList;
+    #endregion
     #region / locals /
     private List<Contact> contacts = null;
     private LoginCred login;
+    private bool openFromEmail;
     #endregion
     #region / construcor /
-    public wuc_contactList(List<Contact> contacts, LoginCred login)
+    public wuc_contactList(List<Contact> contacts, LoginCred login, bool openFromEmail = false)
     {
       this.contacts = contacts;
       this.login = login;
+      this.openFromEmail = openFromEmail;
 
       InitializeComponent();
 
@@ -58,9 +63,16 @@ namespace MailClient.wuc
     }
     private void SendMailTo(object sender, EventArgs e)
     {
-      string msgTo = contacts.Where(x => x.Name == lv_contactList.SelectedItems[0].SubItems[0].Text.ToString()).First().Email;
-      SendMail smf = new SendMail(login.Username, login.Password, msgTo);
-      smf.Show();
+      if (openFromEmail)
+      {
+        ContactAddedToRecipientList(contacts.Where(x => x.Name == lv_contactList.SelectedItems[0].SubItems[0].Text.ToString()).First().Email);
+      }
+      else
+      {
+        string msgTo = contacts.Where(x => x.Name == lv_contactList.SelectedItems[0].SubItems[0].Text.ToString()).First().Email;
+        SendMail smf = new SendMail(contacts, login.Username, login.Password, msgTo);
+        smf.Show();
+      }
     }
     #endregion
   }

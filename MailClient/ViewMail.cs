@@ -18,13 +18,15 @@ namespace MailClient
     private LoginCred login;
     private ImapX.Message message;
     private bool blnAttachments;
+    private List<Contact> contacts;
     #endregion
     #region / constructor /
-    public ViewMail(LoginCred login, ImapX.Message msg)
+    public ViewMail(List<Contact> contacts, LoginCred login, ImapX.Message msg)
     {
       InitializeComponent();
       this.login = login;
       this.message = msg;
+      this.contacts = contacts;
       if (msg.Attachments.Length > 0)
         blnAttachments = true;
       else
@@ -48,12 +50,12 @@ namespace MailClient
     #region / private form methods /
     private void b_reply_Click(object sender, EventArgs e)
     {
-      SendMail sm = new SendMail(login.Username, login.Password, message.From.Address, message.Subject);
+      SendMail sm = new SendMail(contacts, login.Username, login.Password, message.From.Address, message.Subject);
       sm.Show();
     }
     private void b_forward_Click(object sender, EventArgs e)
     {
-      SendMail sm = new SendMail(login.Username, login.Password, message.From.Address, message.Subject, message.Body.Text, message.From.Address);
+      SendMail sm = new SendMail(contacts, login.Username, login.Password, message.From.Address, message.Subject, message.Body.Text, message.From.Address);
       sm.Show();
     }
     private void b_ViewAttachments_Click(object sender, EventArgs e)
