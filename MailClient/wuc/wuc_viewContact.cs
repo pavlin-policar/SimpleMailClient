@@ -92,9 +92,10 @@ namespace MailClient.wuc
       #endregion
       if (blnChanged)
       {
+        string oldFileName = string.Format("{0}\\{1}.contact", MainWindow.contactPath, contact.Name);
         contact.Name = string.Format("{0} {1}", contact.FirstName, contact.LastName);
         string fileName = string.Format("{0}\\{1}.contact", MainWindow.contactPath, contact.Name);
-        File.Delete(fileName);
+        File.Delete(oldFileName);
         Common.SerializeContact(contact, fileName);
         ContactEdited();
       }
