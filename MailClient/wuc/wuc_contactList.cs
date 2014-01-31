@@ -52,6 +52,14 @@ namespace MailClient.wuc
       ef.Controls.Add(addCW);
       ef.Show();
     }
+    private void b_EditContact_Click(object sender, EventArgs e)
+    {
+      EmptyForm ef = new EmptyForm();
+      wuc.wuc_viewContact viewCW = new wuc_viewContact(contacts.Where(x => x.Name == lv_contactList.SelectedItems[0].SubItems[0].Text.ToString()).First());
+      viewCW.ContactEdited += new Delegates.EhVoid(FillContactListView);
+      ef.Controls.Add(viewCW);
+      ef.Show();
+    }
     private void b_DeleteContact_Click(object sender, EventArgs e)
     {
       string fileName = lv_contactList.SelectedItems[0].SubItems[0].Text.ToString();
@@ -64,9 +72,7 @@ namespace MailClient.wuc
     private void SendMailTo(object sender, EventArgs e)
     {
       if (openFromEmail)
-      {
         ContactAddedToRecipientList(contacts.Where(x => x.Name == lv_contactList.SelectedItems[0].SubItems[0].Text.ToString()).First().Email);
-      }
       else
       {
         string msgTo = contacts.Where(x => x.Name == lv_contactList.SelectedItems[0].SubItems[0].Text.ToString()).First().Email;

@@ -34,6 +34,7 @@
       this.b_DeleteContact = new System.Windows.Forms.Button();
       this.lv_contactList = new System.Windows.Forms.ListView();
       this.name_col = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+      this.b_EditContact = new System.Windows.Forms.Button();
       this.flp.SuspendLayout();
       this.flowLayoutPanel1.SuspendLayout();
       this.SuspendLayout();
@@ -53,6 +54,7 @@
       // flowLayoutPanel1
       // 
       this.flowLayoutPanel1.Controls.Add(this.b_AddContact);
+      this.flowLayoutPanel1.Controls.Add(this.b_EditContact);
       this.flowLayoutPanel1.Controls.Add(this.b_DeleteContact);
       this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
       this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -71,7 +73,7 @@
       // 
       // b_DeleteContact
       // 
-      this.b_DeleteContact.Location = new System.Drawing.Point(3, 32);
+      this.b_DeleteContact.Location = new System.Drawing.Point(3, 61);
       this.b_DeleteContact.Name = "b_DeleteContact";
       this.b_DeleteContact.Size = new System.Drawing.Size(135, 23);
       this.b_DeleteContact.TabIndex = 1;
@@ -97,6 +99,16 @@
       this.name_col.Text = "Name";
       this.name_col.Width = 283;
       // 
+      // b_EditContact
+      // 
+      this.b_EditContact.Location = new System.Drawing.Point(3, 32);
+      this.b_EditContact.Name = "b_EditContact";
+      this.b_EditContact.Size = new System.Drawing.Size(135, 23);
+      this.b_EditContact.TabIndex = 2;
+      this.b_EditContact.Text = "Edit Contact";
+      this.b_EditContact.UseVisualStyleBackColor = true;
+      this.b_EditContact.Click += new System.EventHandler(this.b_EditContact_Click);
+      // 
       // wuc_contactList
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -118,5 +130,6 @@
     private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     private System.Windows.Forms.Button b_AddContact;
     private System.Windows.Forms.Button b_DeleteContact;
+    private System.Windows.Forms.Button b_EditContact;
   }
 }
