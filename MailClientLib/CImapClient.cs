@@ -29,6 +29,11 @@ namespace MailClientLib
     }
     #endregion
     #region / public /
+    /// <summary>
+    /// Connects to the imap server.
+    /// </summary>
+    /// <param name="login">Login credidentials containing username and password of user</param>
+    /// <param name="server">Server address to connect to</param>
     public void Connect(LoginCred login, string server)
     {
       imapc = new ImapClient(server, true);
@@ -39,12 +44,19 @@ namespace MailClientLib
           imapc.Behavior.AutoPopulateFolderMessages = true;
         }
     }
+    /// <summary>
+    /// Disconnect from the imap server.
+    /// </summary>
     public void Disconnect ()
     {
       if (imapc != null)
         imapc.Disconnect();
       blnConnected = false;
     }
+    /// <summary>
+    /// Get all folders from the user
+    /// </summary>
+    /// <returns>List of ImapX Folder objects</returns>
     public List<Folder> GetFolders()
     {
       List<Folder> ls = new List<Folder>();
@@ -52,10 +64,18 @@ namespace MailClientLib
         ls.Add(folder);
       return ls;
     }
+    /// <summary>
+    /// Delete message.
+    /// </summary>
+    /// <param name="msg">ImapX Message object</param>
     public void DeleteMail(Message msg)
     {
       msg.Remove();
     }
+    /// <summary>
+    /// Get content of users inbox.
+    /// </summary>
+    /// <returns>List of ImapX Message objects that reside in their inbox</returns>
     public List<Message> GetInbox ()
     {
       List<Message> ls = new List<Message>();

@@ -23,6 +23,15 @@ namespace MailClientLib
     public string message { get; set; }
     #endregion
     #region / constructor /
+    /// <summary>
+    /// Constructor for Custom Smtp Client.
+    /// </summary>
+    /// <param name="usr">Username</param>
+    /// <param name="pass">Password</param>
+    /// <param name="mailTo">Email address of the recipient</param>
+    /// <param name="mailFrom">Who the mail is coming from</param>
+    /// <param name="subject">The Subject of the email</param>
+    /// <param name="message">The body of the email</param>
     public CSmtpClient(string usr, string pass, string mailTo, string mailFrom, string subject, string message)
     {
       this.usr = usr;
@@ -38,6 +47,15 @@ namespace MailClientLib
       objMail.Subject = subject;
       objMail.Body = message;
     }
+    /// <summary>
+    /// Constructor for Custom Smtp Client.
+    /// </summary>
+    /// <param name="usr">Username</param>
+    /// <param name="pass">Password</param>
+    /// <param name="mailTo">Email address of the recipient</param>
+    /// <param name="mailFrom">Who the mail is coming from</param>
+    /// <param name="subject">The Subject of the email</param>
+    /// <param name="attachments">Attachemts added to email</param>
     public CSmtpClient(string usr, string pass, string mailTo, string mailFrom, string subject, string message, Attachment[] attachments)
       : this(usr, pass, mailTo, mailFrom, subject, message)
     {
@@ -47,6 +65,9 @@ namespace MailClientLib
     }
     #endregion
     #region / public /
+    /// <summary>
+    /// Sends email and disposes of CSmtpClient object.
+    /// </summary>
     public void sendMessage()
     {
       SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);

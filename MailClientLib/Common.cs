@@ -47,6 +47,11 @@ namespace MailClientLib
 
   public class Common
   {
+    /// <summary>
+    /// Serialize Domain object.
+    /// </summary>
+    /// <param name="serializableObject">The Domain object you would like to serialize</param>
+    /// <param name="fileName">The path string you would like the file to be saved</param>
     public static void SerializeDomains(Domains serializableObject, string fileName)
     {
       if (serializableObject == null)
@@ -57,6 +62,11 @@ namespace MailClientLib
       stream.Close();
       stream.Dispose();
     }
+    /// <summary>
+    /// Deserialize Domain object.
+    /// </summary>
+    /// <param name="fileName">The path string where the serialized object is loacted</param>
+    /// <returns></returns>
     public static Domains DeserializeDomains(string fileName)
     {
       Domains dm;
@@ -67,6 +77,11 @@ namespace MailClientLib
       stream.Dispose();
       return dm;
     }
+    /// <summary>
+    /// Serialize Contact object.
+    /// </summary>
+    /// <param name="serializableObject">The Contact object you would like to serialize</param>
+    /// <param name="fileName">The path string you would like the file to be saved</param>
     public static void SerializeContact(Contact contact, string fileName)
     {
       if (contact == null)
@@ -76,7 +91,11 @@ namespace MailClientLib
       xmls.Serialize(stream, contact);
       stream.Close();
       stream.Dispose();
-    }
+    }/// <summary>
+    /// Deserialize Contact object.
+    /// </summary>
+    /// <param name="fileName">The path string where the serialized object is loacted</param>
+    /// <returns></returns>
     public static Contact DeserializeContact(string fileName)
     {
       Contact ct;
